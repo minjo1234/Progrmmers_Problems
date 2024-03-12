@@ -37,3 +37,7 @@ def solution(number, limit, power):
         else :
             answer += len(divisionList)
     return answer
+
+# 시간복잡도를 이용하여 숫자를 구한뒤 
+# number를 이용하여 기사단원의 번호를 지정해주는 반복문과 그 이후의 약수를 구하는 반복문을 이용하여 
+# result를 구할 수 있었다.
