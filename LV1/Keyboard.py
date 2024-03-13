@@ -13,6 +13,7 @@
 '''
 
 '''
+keymap	    targets	        result
 ["ABACD", "BCEFD"]	["ABCD","AABB"]	[9, 4]
 ["AA"]	["B"]	[-1]
 ["AGZ", "BSSS"]	["ASA","BGZ"]	[4, 6]
