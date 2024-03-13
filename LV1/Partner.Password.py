@@ -50,4 +50,40 @@ def solution(s, skip, index):
             result += chr(num + count + index) 
     return result
 
+def solution(s, skip, index):
+    answer = ''
+    
+    for c in s:
+        i = ord(c)
+        j = index
+        while j > 0:
+            i += 1
+            if i > ord('z'):
+                i = ord('a')
+            if chr(i) in skip:
+                j += 1
+            j -= 1
+        answer += chr(i)
+    
+    return answer
+
+# 다른 사람의 풀이
+# ord를 이용해서 간단하게 이를 해결하였고 while문의 사용으로 index의 수를 이용해서 이를 간단하게 해결하였다.
+
+def solution(s, skip, index):
+    answer = ''
+
+    for c in s:
+        i = ord(c)
+        j = index
+        while j > 0:
+            i += 1
+            if i > ord('z'):
+                i = ord('a')
+            if chr(i) in skip:
+                j += 1
+            j -= 1
+        answer += chr(i)    
+    return answer 
+
 print(solution(s, skip, index))
