@@ -13,10 +13,9 @@ ingredient = [2, 1, 1, 2, 3, 1, 2, 3, 1]
 
 def solution(ingredient):
     i=0
-    Flag = True
     answer = 0
-    while i < len(ingredient) - 3 :
-            if len(ingredient[i:i+4]) == 4 and ingredient[i:i+4] == [1, 2, 3, 1] :
+    while i < len(ingredient) - 2 :
+            if ingredient[i:i+4] == [1, 2, 3, 1] :
                 del ingredient[i:i+4] 
                 i = 0 
                 answer += 1 
@@ -24,9 +23,24 @@ def solution(ingredient):
             i += 1 
     return answer
 
-print(solution(ingredient))
+#  다르 사람의 풀이
+
+def solution(ingredient):
+    s = []
+    cnt = 0
+    for i in ingredient:
+        s.append(i)
+        print(s[-4:])
+        if s[-4:] == [1, 2, 3, 1]:
+            cnt += 1
+            del s[-4:]
+            
+    return cnt
+
+
 
 # 1231순서로 진행되어야하고 중간에 새로운 숫자가 생기면 진행되지 못한다.
 # 햄버거가 완성될경우 해당 인덱스는 제거된다.
-# 이것도 답은 맞았는데 , hamberger를 만들면 해당하는 인덱스를 삭제하고 answer에 카운트를 세는 식으로 진행하였는데 정답과 동일하지는 않았다.
-# i라는 숫자가 0으로 되어야하는 데 
+# 답은 맞았으나 시간 초과로 인해서 정답을 인식하지 못하였고 비슷한 사례를 검색하여 찾아내었다.
+# 인덱스의 잦은 비교와 len의 사용을 최소화했고 pop과 del을 사용하는 방식 중 풀이자는 반복문을 이용한 pop을 사용했지만 
+# 나는 del을 사용하여 한 번에 해결하고자 하였다.
