@@ -8,7 +8,7 @@
 '''
 X	Y	result
 "100"	"2345"	"-1"
-"100"	"203045"	"0"
+"166"	"263645"	"0"
 "100"	"123450"	"10"
 "12321"	"42531"	"321"
 "5525"	"1255"	"552"
@@ -18,31 +18,12 @@ X	Y	result
 # max를 이용해서 값을 변경하는 식으로 진행했습니다.
 # 하지만 문자열을 수정하는 부분에서 오류가 발생하였고 del 사용불가 (문자열을 리스트로 만들거나 , replace를 사용하는 방법이 존재함 
 # )
-X = "100"
-Y = "2345"
+X = "166"
+Y = "263645"
 
 def solution(X, Y):
     answer = [] 
     result = ''
-
-    for i in range(len(X)):
-        for j in range(len(Y)):
-            if X[i] == Y[j]:
-                answer.append(Y[j])
-                Y = Y.replace(Y[j], "" , 1)
-                break  
-    print(answer)
-
-    if answer == [] :
-        result = '-1' 
-    elif max(answer) == '0' :
-        result = '0' 
-    else :
-        for p in range(len(answer)):
-            result += max(answer)
-            del answer[answer.index(max(answer))]
-   
-    return result
 
 
 def solution(X, Y):
@@ -63,8 +44,31 @@ def solution(X, Y):
     return answer
 
 
-print(solution(X, Y)) 
 
 # 문제해결방식으로는 중복 반복문을 통해서 인덱스가 일치한다면 제거하는 방식으로 진행한다.
 # 또한 문자열과 정수형 과정에서 if ~ elif 구문을적용하여 문제를 해결하였고 모두 정답을 맞추었다.
-# 하지만 시간초과가 발생하였다.
+# 하지만 시간초과가 발생하였다. 시간초과가 발생한 이후에 코드를 수정하여 sorted를 이용하여 간단하게 해결하였지만 또 시간초과가 발생하였다.
+# 그래서 dictionary 형태로 정렬이 가능한 Counter 모듈을 사용하기로 하였다. 
+
+from collections import Counter
+
+def solution(X, Y):
+    # 숫자 개수 세기
+    # Counter를 사용하면 dictionary 형태로 숫자를 받을 수 있다.
+    nums = Counter(X) & Counter(Y) 
+    
+    if not nums : return '-1' # 공통이 없는 경우 
+    elif list(nums) == ['0'] : return 0 
+
+    nums_order = sorted(list(nums),reverse=True) # 내림차순 정렬
+    answer = ''
+    for num in nums_order:
+        answer += num * nums[num]
+    return answer
+
+
+# Counter 모듈을 사용하여 dictionary 형태로 저장하고 저장된 형태로 공통이 없는 경우 , 공통이 0만 존재하는 경우 
+# 마지막으로 다양한 공통이 존재하는 경우에는 sort를 실행한 이후 dictionary의 key:item으로 곱해서 최대정수를 구하는 방식으로 진행하였다.
+# for 문을 이용한 다른 풀이도 존재하지만 Collection 모듈을 사용하는게 시간복잡도가 O(n)으로 최소값이기에 사용하기에 가장 간편하고 좋다.
+
+
